@@ -3,12 +3,13 @@ import Image from 'next/image'
 import useProducts from './useProducts'
 import styles from './styles/Products.module.scss'
 import { useBasketContext } from '../../context/Basket'
+import ProductCounter from '../ProductCounter'
 
 const getProductFromBasket = (products, id) => products.find(product => id === product.id)
 
 const Products = () => {
   const { products } = useProducts()
-  const { products: basketProducts, add, remove } = useBasketContext()
+  const { products: basketProducts, add, remove, update } = useBasketContext()
 
   return (
     <div className={styles.products}>
@@ -23,15 +24,12 @@ const Products = () => {
 
             {productInBasket ? (
               <>
-                <div>
-                  <button type="button" onClick={() => remove(product.id)}>
-                    -
-                  </button>
-                  <input type="number" name="quantity" value={productInBasket.quantity} min="0" max="10" />
-                  <button type="button" onClick={() => add(product)}>
-                    +
-                  </button>
-                </div>
+                <ProductCounter
+                  value={productInBasket.quantity}
+                  onChange={qty => update(product.id, qty)}
+                  onAdd={() => add(product)}
+                  onRemove={() => remove(product.id, true)}
+                />
 
                 <button type="button" onClick={() => remove(product.id, true)}>
                   Remove
