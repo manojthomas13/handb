@@ -186,3 +186,64 @@ test('does not throw any errors when trying to remove an item that do no exits i
     { id: 'product-3', name: 'Product 3', quantity: 1 },
   ])
 })
+
+test('updates the quantity of an item in the basket', () => {
+  const { result } = renderHook(() => useBasket())
+
+  act(() => {
+    result.current.add({ id: 'product-1', name: 'Product 1' })
+    result.current.add({ id: 'product-1', name: 'Product 1' })
+    result.current.add({ id: 'product-2', name: 'Product 2' })
+    result.current.add({ id: 'product-2', name: 'Product 2' })
+    result.current.add({ id: 'product-2', name: 'Product 2' })
+    result.current.add({ id: 'product-2', name: 'Product 2' })
+    result.current.add({ id: 'product-3', name: 'Product 3' })
+  })
+
+  expect(result.current.products).toEqual([
+    { id: 'product-1', name: 'Product 1', quantity: 2 },
+    { id: 'product-2', name: 'Product 2', quantity: 4 },
+    { id: 'product-3', name: 'Product 3', quantity: 1 },
+  ])
+
+  act(() => {
+    result.current.update('product-1', 3)
+    result.current.update('product-2', 2)
+  })
+
+  expect(result.current.products).toEqual([
+    { id: 'product-3', name: 'Product 3', quantity: 1 },
+    { id: 'product-1', name: 'Product 1', quantity: 3 },
+    { id: 'product-2', name: 'Product 2', quantity: 2 },
+  ])
+})
+
+test('removes an item from the basket when updating the quantity with 0', () => {
+  const { result } = renderHook(() => useBasket())
+
+  act(() => {
+    result.current.add({ id: 'product-1', name: 'Product 1' })
+    result.current.add({ id: 'product-1', name: 'Product 1' })
+    result.current.add({ id: 'product-2', name: 'Product 2' })
+    result.current.add({ id: 'product-2', name: 'Product 2' })
+    result.current.add({ id: 'product-2', name: 'Product 2' })
+    result.current.add({ id: 'product-2', name: 'Product 2' })
+    result.current.add({ id: 'product-3', name: 'Product 3' })
+  })
+
+  expect(result.current.products).toEqual([
+    { id: 'product-1', name: 'Product 1', quantity: 2 },
+    { id: 'product-2', name: 'Product 2', quantity: 4 },
+    { id: 'product-3', name: 'Product 3', quantity: 1 },
+  ])
+
+  act(() => {
+    result.current.update('product-1', 0)
+    result.current.update('product-2', 2)
+  })
+
+  expect(result.current.products).toEqual([
+    { id: 'product-3', name: 'Product 3', quantity: 1 },
+    { id: 'product-2', name: 'Product 2', quantity: 2 },
+  ])
+})

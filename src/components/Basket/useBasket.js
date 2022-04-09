@@ -4,6 +4,7 @@ const actions = {
   ADD: 'ADD',
   REMOVE: 'REMOVE',
   EMPTY: 'EMPTY',
+  UPDATE: 'UPDATE',
 }
 
 const useBasket = () => {
@@ -30,6 +31,16 @@ const useBasket = () => {
       case actions.EMPTY: {
         return []
       }
+      case actions.UPDATE: {
+        const item = state.find(({ id }) => id === action.id)
+        const items = item
+          ? action.quantity === 0
+            ? state.filter(({ id }) => id != action.id)
+            : [...state.filter(({ id }) => id != action.id), { ...item, quantity: action.quantity }]
+          : state
+
+        return items
+      }
       default:
         break
     }
@@ -47,7 +58,11 @@ const useBasket = () => {
     dispatch({ type: actions.EMPTY })
   }
 
-  return { products, add, remove, empty }
+  const update = (id, quantity) => {
+    dispatch({ type: actions.UPDATE, id, quantity })
+  }
+
+  return { products, add, remove, empty, update }
 }
 
 export default useBasket
