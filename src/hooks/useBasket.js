@@ -16,7 +16,7 @@ const useBasket = () => {
           ? [...state.filter(({ id }) => id != action.product.id), { ...item, quantity: item.quantity + 1 }]
           : [...state, { ...action.product, quantity: 1 }]
 
-        return items
+        return items.sort((a, b) => a.id.localeCompare(b.id))
       }
       case actions.REMOVE: {
         const item = state.find(({ id }) => id === action.id)
@@ -26,7 +26,7 @@ const useBasket = () => {
             : [...state.filter(({ id }) => id != action.id), { ...item, quantity: item.quantity - 1 }]
           : state
 
-        return items
+        return items.sort((a, b) => a.id.localeCompare(b.id))
       }
       case actions.EMPTY: {
         return []
@@ -39,7 +39,7 @@ const useBasket = () => {
             : [...state.filter(({ id }) => id != action.id), { ...item, quantity: action.quantity }]
           : state
 
-        return items
+        return items.sort((a, b) => a.id.localeCompare(b.id))
       }
       default:
         break

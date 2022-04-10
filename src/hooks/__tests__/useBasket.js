@@ -96,8 +96,8 @@ test('removes an item from the basket, if the item already exists', () => {
   })
 
   expect(result.current.products).toEqual([
-    { id: 'product-3', name: 'Product 3', quantity: 1 },
     { id: 'product-1', name: 'Product 1', quantity: 1 },
+    { id: 'product-3', name: 'Product 3', quantity: 1 },
   ])
 })
 
@@ -212,9 +212,9 @@ test('updates the quantity of an item in the basket', () => {
   })
 
   expect(result.current.products).toEqual([
-    { id: 'product-3', name: 'Product 3', quantity: 1 },
     { id: 'product-1', name: 'Product 1', quantity: 3 },
     { id: 'product-2', name: 'Product 2', quantity: 2 },
+    { id: 'product-3', name: 'Product 3', quantity: 1 },
   ])
 })
 
@@ -243,7 +243,7 @@ test('removes an item from the basket when updating the quantity with 0', () => 
   })
 
   expect(result.current.products).toEqual([
-    { id: 'product-3', name: 'Product 3', quantity: 1 },
     { id: 'product-2', name: 'Product 2', quantity: 2 },
+    { id: 'product-3', name: 'Product 3', quantity: 1 },
   ])
 })
