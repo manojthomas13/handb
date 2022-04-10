@@ -5,22 +5,36 @@
 .counterContainer {
     display: flex;
     justify-content: space-evenly;
-    border: 2px solid #CDCDCD;
     border-radius: 8px;
-
     margin-top: 1rem;
 }
 
-.counterContainer button{
-    background: transparent;
+.counterContainer button {
+    background: #00594C;
     display: flex;
     align-items: center;
     border: none;
     cursor: pointer;
+    height: 2.5rem;
 }
 
-.counterContainer input[type=number]{ 
-    border: none;
+.buttonLeft {
+    border-top-left-radius: 0.2rem;
+    border-bottom-left-radius: 0.2rem;
+}
+
+ .buttonRight {
+    border-top-right-radius: 0.2rem;
+    border-bottom-right-radius: 0.2rem;
+}
+
+.counterContainer input[type=number] {  
+    text-align: center;
+    border-top: solid 1px #00594C;
+    border-right: none;
+    border-left: none;
+    border-bottom: solid 1px #00594C;
+    width: 3rem;
 }
 
 .deleteProduct {

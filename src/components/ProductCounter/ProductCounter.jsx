@@ -11,11 +11,11 @@ const ProductCounter = ({ onChange, onAdd, onRemove, onDelete, value }) => {
   return (
     <div className={styles.container}>
       <div className={styles.counterContainer}>
-        <button type="button" onClick={onRemove}>
+        <button type="button" onClick={onRemove} className={styles.buttonLeft}>
           <REMOVE />
         </button>
         <input type="number" name="quantity" value={value} min="0" max="10" onChange={onChangeQuantity} />
-        <button type="button" onClick={onAdd}>
+        <button type="button" onClick={onAdd} className={styles.buttonRight}>
           <ADD />
         </button>
       </div>
