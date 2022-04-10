@@ -2,6 +2,8 @@ import { useBasketContext } from '../../context/Basket'
 import ProductCounter from '../ProductCounter'
 import formatCurrency from '../../utils/formatCurrency'
 
+import styles from './styles/Basket.module.css'
+
 const Basket = () => {
   const { products, add, remove, empty } = useBasketContext()
   const productCount = products.reduce((accum, curr) => curr.quantity + accum, 0)
@@ -9,7 +11,7 @@ const Basket = () => {
 
   return (
     <>
-      <div>
+      <div className={styles.products}>
         {products.map(product => {
           return (
             <div key={product.id}>
