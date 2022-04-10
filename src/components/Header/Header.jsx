@@ -2,6 +2,7 @@ import Link from 'next/link'
 
 import { useBasketContext } from '../../context/Basket'
 import formatCurrency from '../../utils/formatCurrency'
+import styles from './styles/Header.module.css'
 
 const Header = () => {
   const { products } = useBasketContext()
@@ -9,14 +10,18 @@ const Header = () => {
   const productTotal = products.reduce((accum, curr) => curr.price * curr.quantity + accum, 0)
 
   return (
-    <div>
-      <Link href="/">Home</Link>
-      <Link href="/basket">
-        <a>
-          {productCount} {formatCurrency(productTotal)}
-        </a>
-      </Link>
-    </div>
+    <header className={styles.header}>
+      <div className={styles.container}>
+        <nav className={styles.navigation}>
+          <Link href="/">Home</Link>
+          <Link href="/basket">
+            <a className={styles.trolley}>
+              {productCount} {formatCurrency(productTotal)}
+            </a>
+          </Link>
+        </nav>
+      </div>
+    </header>
   )
 }
 

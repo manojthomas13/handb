@@ -1,0 +1,27 @@
+.header {
+    background-color: #00594c;
+    margin-bottom: 3rem;
+    height: 5rem;
+}
+
+.container {
+    padding: 0 12px;
+    max-width: 1024px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.navigation {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.navigation a {
+    color: #FFF
+}
+
+.trolley {
+    margin-left: auto;
+}
+
