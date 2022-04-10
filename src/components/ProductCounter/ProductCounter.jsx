@@ -1,11 +1,23 @@
+import { useState, useEffect } from 'react'
+
 import styles from './styles/ProductCounter.module.scss'
 
 import ADD from '../../assets/add.svg'
 import REMOVE from '../../assets/remove.svg'
 
 const ProductCounter = ({ onChange, onAdd, onRemove, onDelete, value }) => {
+  const [quantity, setQuantity] = useState(value)
+
+  useEffect(() => {
+    setQuantity(value)
+  }, [value])
+
   const onChangeQuantity = e => {
-    onChange(parseInt(e.target.value, 10))
+    setQuantity(e.target.value)
+
+    if (e.target.value) {
+      onChange(parseInt(e.target.value, 10))
+    }
   }
 
   return (
@@ -14,7 +26,19 @@ const ProductCounter = ({ onChange, onAdd, onRemove, onDelete, value }) => {
         <button type="button" onClick={onRemove} className={styles.buttonLeft}>
           <REMOVE />
         </button>
-        <input type="number" name="quantity" value={value} min="0" max="10" onChange={onChangeQuantity} />
+        <input
+          type="number"
+          name="quantity"
+          value={quantity}
+          min="0"
+          max="10"
+          onChange={onChangeQuantity}
+          onBlur={e => {
+            if (!e.target.value) {
+              setQuantity(value)
+            }
+          }}
+        />
         <button type="button" onClick={onAdd} className={styles.buttonRight}>
           <ADD />
         </button>
