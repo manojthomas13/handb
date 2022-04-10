@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import styles from './styles/ProductCounter.module.scss'
+import styles from './styles/ProductCounter.module.css'
 
 import ADD from '../../assets/add.svg'
 import REMOVE from '../../assets/remove.svg'

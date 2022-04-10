@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 import useProducts from './useProducts'
-import styles from './styles/Products.module.scss'
+import styles from './styles/Products.module.css'
 import { useBasketContext } from '../../context/Basket'
 import ProductCounter from '../ProductCounter'
 import formatCurrency from '../../utils/formatCurrency'
