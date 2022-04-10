@@ -23,18 +23,13 @@ const Products = () => {
             <div> {product.price}</div>
 
             {productInBasket ? (
-              <>
-                <ProductCounter
-                  value={productInBasket.quantity}
-                  onChange={qty => update(product.id, qty)}
-                  onAdd={() => add(product)}
-                  onRemove={() => remove(product.id, true)}
-                />
-
-                <button type="button" onClick={() => remove(product.id, true)}>
-                  Remove
-                </button>
-              </>
+              <ProductCounter
+                value={productInBasket.quantity}
+                onChange={qty => update(product.id, qty)}
+                onAdd={() => add(product)}
+                onRemove={() => remove(product.id)}
+                onDelete={() => remove(product.id, true)}
+              />
             ) : (
               <button type="button" onClick={() => add(product)}>
                 Add to basket
