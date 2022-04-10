@@ -1,10 +1,7 @@
 import Link from 'next/link'
-import { useBasketContext } from '../../context/Basket'
 
-var formatterGB = new Intl.NumberFormat('en-GB', {
-  style: 'currency',
-  currency: 'GBP',
-})
+import { useBasketContext } from '../../context/Basket'
+import formatCurrency from '../../utils/formatCurrency'
 
 const Header = () => {
   const { products } = useBasketContext()
@@ -16,7 +13,7 @@ const Header = () => {
       <Link href="/">Home</Link>
       <Link href="/basket">
         <a>
-          {productCount} {formatterGB.format(productTotal)}
+          {productCount} {formatCurrency(productTotal)}
         </a>
       </Link>
     </div>

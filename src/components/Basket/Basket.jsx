@@ -1,5 +1,6 @@
 import { useBasketContext } from '../../context/Basket'
 import ProductCounter from '../ProductCounter'
+import formatCurrency from '../../utils/formatCurrency'
 
 const Basket = () => {
   const { products, add, remove, empty } = useBasketContext()
@@ -29,9 +30,7 @@ const Basket = () => {
       <button type="button" onClick={() => empty()} disabled={productCount === 0}>
         Empty basket
       </button>
-      <div>{`Total (${productCount}) ${productCount === 1 ? 'item' : 'items'} ${formatterGB.format(
-        productTotal
-      )}`}</div>
+      <div>{`Total (${productCount}) ${productCount === 1 ? 'item' : 'items'} ${formatCurrency(productTotal)}`}</div>
     </>
   )
 }
