@@ -4,6 +4,7 @@ import useProducts from './useProducts'
 import styles from './styles/Products.module.scss'
 import { useBasketContext } from '../../context/Basket'
 import ProductCounter from '../ProductCounter'
+import formatCurrency from '../../utils/formatCurrency'
 
 const getProductFromBasket = (products, id) => products.find(product => id === product.id)
 
@@ -20,7 +21,7 @@ const Products = () => {
           <div key={product.id}>
             <Image alt={product.title} src={product.image} width={384} height={384} />
             <div> {product.title}</div>
-            <div> {product.price}</div>
+            <div> {formatCurrency(product.price)}</div>
 
             {productInBasket ? (
               <ProductCounter
@@ -31,8 +32,8 @@ const Products = () => {
                 onDelete={() => remove(product.id, true)}
               />
             ) : (
-              <button type="button" onClick={() => add(product)}>
-                Add to basket
+              <button type="button" onClick={() => add(product)} className={styles.buttonAddToBasket}>
+                Add to Basket
               </button>
             )}
           </div>

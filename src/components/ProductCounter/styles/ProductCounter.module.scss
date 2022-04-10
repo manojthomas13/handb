@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+}
+
+.counterContainer {
+    display: flex;
+    justify-content: space-evenly;
+    border: 2px solid #CDCDCD;
+    border-radius: 8px;
+
+    margin-top: 1rem;
+}
+
+.counterContainer button{
+    background: transparent;
+    display: flex;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+}
+
+.counterContainer input[type=number]{ 
+    border: none;
+}
+
+.deleteProduct {
+    font-size: 0.7rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+}
