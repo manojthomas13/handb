@@ -17,7 +17,7 @@ const Basket = () => {
               <div> {product.price}</div>
 
               <ProductCounter
-                value={productInBasket.quantity}
+                value={product.quantity}
                 onChange={qty => update(product.id, qty)}
                 onAdd={() => add(product)}
                 onRemove={() => remove(product.id)}
