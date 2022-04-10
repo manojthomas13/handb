@@ -1,9 +1,5 @@
 import { useBasketContext } from '../../context/Basket'
-
-const formatterGB = new Intl.NumberFormat('en-GB', {
-  style: 'currency',
-  currency: 'GBP',
-})
+import ProductCounter from '../ProductCounter'
 
 const Basket = () => {
   const { products, add, remove, empty } = useBasketContext()
@@ -19,21 +15,13 @@ const Basket = () => {
               <div> {product.title}</div>
               <div> {product.price}</div>
 
-              <>
-                <div>
-                  <button type="button" onClick={() => remove(product.id)}>
-                    -
-                  </button>
-                  <input type="number" name="quantity" value={product.quantity} min="0" max="10" />
-                  <button type="button" onClick={() => add(product)}>
-                    +
-                  </button>
-                </div>
-
-                <button type="button" onClick={() => remove(product.id, true)}>
-                  Remove
-                </button>
-              </>
+              <ProductCounter
+                value={productInBasket.quantity}
+                onChange={qty => update(product.id, qty)}
+                onAdd={() => add(product)}
+                onRemove={() => remove(product.id)}
+                onDelete={() => remove(product.id, true)}
+              />
             </div>
           )
         })}
