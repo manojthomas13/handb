@@ -1,19 +1,33 @@
-function wait(delayInMilliseconds) {
-  return new Promise(resolve => setTimeout(resolve, delayInMilliseconds))
+const wait = delay => {
+  return new Promise(resolve => setTimeout(resolve, delay))
 }
 
-function randomInteger(max) {
-  return Math.floor(Math.random() * max)
+const getProductDiscounts = async () => {
+  await wait(Math.floor(Math.random() * 500))
+
+  const discounts = [
+    {
+      id: '1f2da4ef-c1b7-4b4e-b172-59f19987e0be',
+      discount: { type: 'MULTI_BUY_TYPE_1', customerBuys: 3, customerPays: 2 },
+    },
+
+    {
+      id: '0157f7cb-ecfc-46aa-a89e-fb16d72e1e5b',
+      discount: { type: 'MULTI_BUY_TYPE_2', customerBuys: 2, customerDiscount: 0.2 },
+    },
+  ]
+
+  return discounts
 }
 
-async function getProducts() {
-  await wait(randomInteger(500))
+const getProducts = async () => {
+  await wait(Math.floor(Math.random() * 500))
 
   const products = [
     {
       id: '1f2da4ef-c1b7-4b4e-b172-59f19987e0be',
       title: 'Manuka Lab Multifloral Manuka Honey 40 MGO 500g',
-      price: 14.99,
+      price: 15,
       image: 'https://images.hollandandbarrettimages.co.uk/productimages/HB/384/050489_A.jpg',
     },
     {
@@ -31,7 +45,7 @@ async function getProducts() {
     {
       id: '0157f7cb-ecfc-46aa-a89e-fb16d72e1e5b',
       title: 'Holland & Barrett Organic Wild Flower Clear Honey 340g',
-      price: 3.99,
+      price: 2.5,
       image: 'https://images.hollandandbarrettimages.co.uk/productimages/HB/384/083952_A.jpg',
     },
     {
@@ -42,9 +56,7 @@ async function getProducts() {
     },
   ]
 
-  return {
-    products,
-  }
+  return products
 }
 
-export { getProducts }
+export { getProducts, getProductDiscounts }

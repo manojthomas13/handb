@@ -1,6 +1,5 @@
 import Image from 'next/image'
 
-import useProducts from './useProducts'
 import styles from './styles/Products.module.css'
 import { useBasketContext } from '../../context/Basket'
 import ProductCounter from '../ProductCounter'
@@ -8,8 +7,7 @@ import formatCurrency from '../../utils/formatCurrency'
 
 const getProductFromBasket = (products, id) => products.find(product => id === product.id)
 
-const Products = () => {
-  const { products } = useProducts()
+const Products = ({ products }) => {
   const { products: basketProducts, add, remove, update } = useBasketContext()
 
   return (

@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { SWRConfig } from 'swr'
 
 import '../styles/globals.css'
 import styles from '../styles/Main.module.css'
@@ -16,13 +17,14 @@ function MyApp({ Component, pageProps }) {
         <title>H and B</title>
         <meta name="description" content="" />
       </Head>
-
-      <BasketContext.Provider value={{ products, add, empty, remove, update }}>
-        <Header />
-        <div className={styles.container}>
-          <Component {...pageProps} />
-        </div>
-      </BasketContext.Provider>
+      <SWRConfig value={{ fetcher: (resource, init) => fetch(resource, init).then(res => res.json()) }}>
+        <BasketContext.Provider value={{ products, add, empty, remove, update }}>
+          <Header />
+          <div className={styles.container}>
+            <Component {...pageProps} />
+          </div>
+        </BasketContext.Provider>
+      </SWRConfig>
     </>
   )
 }
