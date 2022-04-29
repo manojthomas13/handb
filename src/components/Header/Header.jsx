@@ -6,9 +6,8 @@ import calculateBasket from '../../utils/calculateBasket'
 import styles from './styles/Header.module.css'
 
 const Header = () => {
-  const { products } = useBasketContext()
+  const { products, totalCount } = useBasketContext()
   const productDiscounts = useProductDiscountsContext()
-  const productCount = products.reduce((accum, curr) => curr.quantity + accum, 0)
   const productTotal = calculateBasket(products, productDiscounts)
 
   return (
@@ -18,7 +17,7 @@ const Header = () => {
           <Link href="/">Home</Link>
           <Link href="/basket">
             <a className={styles.trolley}>
-              {productCount} {formatCurrency(productTotal)}
+              {totalCount} {formatCurrency(productTotal)}
             </a>
           </Link>
         </nav>

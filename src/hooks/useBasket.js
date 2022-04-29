@@ -62,7 +62,14 @@ const useBasket = () => {
     dispatch({ type: actions.UPDATE, id, quantity })
   }
 
-  return { products: products.sort((a, b) => a.id.localeCompare(b.id)), add, remove, empty, update }
+  return {
+    products: products.sort((a, b) => a.id.localeCompare(b.id)),
+    totalCount: products.reduce((accum, curr) => curr.quantity + accum, 0),
+    add,
+    remove,
+    empty,
+    update,
+  }
 }
 
 export default useBasket

@@ -9,9 +9,8 @@ import calculateBasket from '../../utils/calculateBasket'
 import styles from './styles/Basket.module.css'
 
 const Basket = () => {
-  const { products, add, remove, empty, update } = useBasketContext()
+  const { products, add, remove, empty, update, totalCount } = useBasketContext()
   const productDiscounts = useProductDiscountsContext()
-  const productCount = products.reduce((accum, curr) => curr.quantity + accum, 0)
   const productTotal = calculateBasket(products, productDiscounts)
 
   return (
@@ -37,10 +36,10 @@ const Basket = () => {
           )
         })}
       </div>
-      <button type="button" onClick={() => empty()} disabled={productCount === 0}>
+      <button type="button" onClick={() => empty()} disabled={totalCount === 0}>
         Empty basket
       </button>
-      <div>{`Total (${productCount}) ${productCount === 1 ? 'item' : 'items'} ${formatCurrency(productTotal)}`}</div>
+      <div>{`Total (${totalCount}) ${totalCount === 1 ? 'item' : 'items'} ${formatCurrency(productTotal)}`}</div>
     </>
   )
 }
