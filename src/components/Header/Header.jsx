@@ -2,13 +2,12 @@ import Link from 'next/link'
 import { useBasketContext } from '../../context/Basket'
 import { useProductDiscountsContext } from '../../context/ProductDiscounts'
 import formatCurrency from '../../utils/formatCurrency'
-import calculateBasket from '../../utils/calculateBasket'
 import styles from './styles/Header.module.css'
 
 const Header = () => {
-  const { products, totalCount } = useBasketContext()
+  const { totalCount, calculateBasket } = useBasketContext()
   const productDiscounts = useProductDiscountsContext()
-  const productTotal = calculateBasket(products, productDiscounts)
+  const productTotal = calculateBasket(productDiscounts)
 
   return (
     <header className={styles.header}>

@@ -1,4 +1,5 @@
 import { useReducer } from 'react'
+import calculateBasket from '../utils/calculateBasket'
 
 const actions = {
   ADD: 'ADD',
@@ -46,29 +47,14 @@ const useBasket = () => {
     }
   }, [])
 
-  const add = product => {
-    dispatch({ type: actions.ADD, product })
-  }
-
-  const remove = (id, isDelete = false) => {
-    dispatch({ type: actions.REMOVE, id, isDelete })
-  }
-
-  const empty = () => {
-    dispatch({ type: actions.EMPTY })
-  }
-
-  const update = (id, quantity) => {
-    dispatch({ type: actions.UPDATE, id, quantity })
-  }
-
   return {
     products: products.sort((a, b) => a.id.localeCompare(b.id)),
     totalCount: products.reduce((accum, curr) => curr.quantity + accum, 0),
-    add,
-    remove,
-    empty,
-    update,
+    calculateBasket: discounts => calculateBasket(products, discounts),
+    add: product => dispatch({ type: actions.ADD, product }),
+    remove: (id, isDelete = false) => dispatch({ type: actions.REMOVE, id, isDelete }),
+    empty: () => dispatch({ type: actions.EMPTY }),
+    update: (id, quantity) => dispatch({ type: actions.UPDATE, id, quantity }),
   }
 }
 

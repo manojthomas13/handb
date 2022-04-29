@@ -4,14 +4,13 @@ import { useBasketContext } from '../../context/Basket'
 import { useProductDiscountsContext } from '../../context/ProductDiscounts'
 import ProductCounter from '../ProductCounter'
 import formatCurrency from '../../utils/formatCurrency'
-import calculateBasket from '../../utils/calculateBasket'
 
 import styles from './styles/Basket.module.css'
 
 const Basket = () => {
-  const { products, add, remove, empty, update, totalCount } = useBasketContext()
+  const { products, add, remove, empty, update, totalCount, calculateBasket } = useBasketContext()
   const productDiscounts = useProductDiscountsContext()
-  const productTotal = calculateBasket(products, productDiscounts)
+  const productTotal = calculateBasket(productDiscounts)
 
   return (
     <>
