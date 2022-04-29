@@ -1,28 +1,15 @@
 import Link from 'next/link'
-import useSWR from 'swr/immutable'
 import { useBasketContext } from '../../context/Basket'
+import { useProductDiscountsContext } from '../../context/ProductDiscounts'
 import formatCurrency from '../../utils/formatCurrency'
-import getDiscountPrice from '../../utils/getDiscountPrice'
+import calculateBasket from '../../utils/calculateBasket'
 import styles from './styles/Header.module.css'
-
-const calculateTotal = (products, discounts) => {
-  const productTotal = products.reduce((accum, product) => {
-    const discountedProduct = discounts.find(d => d.id === product.id)
-    const price = discountedProduct
-      ? getDiscountPrice(product, discountedProduct.discount)
-      : product.price * product.quantity
-
-    return price + accum
-  }, 0)
-
-  return productTotal
-}
 
 const Header = () => {
   const { products } = useBasketContext()
-  const { data } = useSWR('/api/productDiscounts')
+  const productDiscounts = useProductDiscountsContext()
   const productCount = products.reduce((accum, curr) => curr.quantity + accum, 0)
-  const productTotal = data ? calculateTotal(products, data.discounts) : 0
+  const productTotal = calculateBasket(products, productDiscounts)
 
   return (
     <header className={styles.header}>

@@ -1,15 +1,18 @@
 import Image from 'next/image'
 
 import { useBasketContext } from '../../context/Basket'
+import { useProductDiscountsContext } from '../../context/ProductDiscounts'
 import ProductCounter from '../ProductCounter'
 import formatCurrency from '../../utils/formatCurrency'
+import calculateBasket from '../../utils/calculateBasket'
 
 import styles from './styles/Basket.module.css'
 
 const Basket = () => {
   const { products, add, remove, empty, update } = useBasketContext()
+  const productDiscounts = useProductDiscountsContext()
   const productCount = products.reduce((accum, curr) => curr.quantity + accum, 0)
-  const productTotal = products.reduce((accum, curr) => curr.price * curr.quantity + accum, 0)
+  const productTotal = calculateBasket(products, productDiscounts)
 
   return (
     <>

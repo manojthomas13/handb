@@ -20,4 +20,17 @@ const getDiscountPrice = (product, discount) => {
   }
 }
 
-export default getDiscountPrice
+const calculateBasket = (products, discounts) => {
+  const productTotal = products.reduce((accum, product) => {
+    const discountedProduct = discounts.find(d => d.id === product.id)
+    const price = discountedProduct
+      ? getDiscountPrice(product, discountedProduct.discount)
+      : product.price * product.quantity
+
+    return price + accum
+  }, 0)
+
+  return productTotal
+}
+
+export default calculateBasket
